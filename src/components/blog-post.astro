@@ -1,0 +1,15 @@
+---
+/*
+  @note
+  You can also define your props with TypeScript with a Props type interface. Astro will automatically pick up the Props interface in your frontmatter and give type warnings/errors. These props can also be given default values when destructured from Astro.props.
+*/
+interface Props {
+  url: string;
+  title: string;
+}
+const { url, title } = Astro.props;
+---
+
+<li>
+  <a href={url}>{title}</a>
+</li>

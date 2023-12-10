@@ -1,0 +1,56 @@
+---
+import type { MarkdownInstance } from "astro";
+import BaseLayout from "../../components/layouts/base-layout.astro";
+import BlogPost from "../../components/blog-post.astro";
+import { getCollection } from "astro:content";
+
+// type ReturnType = {
+//   params: { tag: string };
+//   props: { posts: MarkdownInstance<Record<string, any>>[] };
+// }[];
+
+// @note The getStaticPaths function returns an array of page paths, and all pages in those paths will use the same template defined in the file.
+// @note A getStaticPaths function should always return a list of objects containing params (how to call each page path) and optionally any props (data you want to pass to those pages).
+export async function getStaticPaths() {
+  // const allPosts = await Astro.glob("../posts/*.md");
+  const allPosts = await getCollection("posts");
+
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.data.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+// @note this the way to get the path paramaters and the props from the getStaticPaths
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<!-- @note dynamic page routing -->
+<BaseLayout pageTitle={tag}>
+  <p>Entradas etiquetadas con {tag}</p>
+  <ul>
+    <!--
+    {
+      posts.map((post: { url: string; frontmatter: { title: string } }) => (
+        <BlogPost url={post.url} title={post.frontmatter.title} />
+      ))
+    }
+
+     -->
+    {
+      posts.map((post) => (
+        <BlogPost url={`/posts/${post.slug}/`} title={post.data.title} />
+      ))
+    }
+  </ul>
+</BaseLayout>

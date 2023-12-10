@@ -1,16 +1,12 @@
 ---
+import Greeting from "../components/greeting";
+import BaseLayout from "../components/layouts/base-layout.astro";
 
+const pageTitle = "Página de inicio";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Hello Astro</h1>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+  <h2>Mi impresionante subtítulo del blog</h2>
+  <!-- @note The `client:load` directive tells Astro to send and re-execute your JavaScript on the client when the page loads, making the component interactive. This is called a hydrated component. -->
+  <Greeting client:load messages={["Hola", "Qué tal", "Hola a todos"]} />
+</BaseLayout>

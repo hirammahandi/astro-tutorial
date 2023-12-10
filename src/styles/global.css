@@ -1,0 +1,163 @@
+:root {
+    --primary-100: #1F3A5F;
+    --primary-200: #4d648d;
+    --primary-300: #acc2ef;
+    --accent-100: #3D5A80;
+    --accent-200: #cee8ff;
+    --text-100: #FFFFFF;
+    --text-200: #e0e0e0;
+    --bg-100: #0F1C2E;
+    --bg-200: #1f2b3e;
+    --bg-300: #374357;
+}
+
+
+html.dark {
+    background-color: #0d0950;
+    color: #fff;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    background-color: var(--bg-100);
+}
+
+* {
+    color: var(--text-100);
+    box-sizing: border-box;
+}
+
+img,
+picture,
+svg {
+    max-width: 100%;
+    display: block;
+}
+
+header {
+    padding: 1rem;
+    background-color: var(--bg-300);
+}
+
+
+main {
+    flex: 1;
+    width: min(80ch, 100% - 4rem);
+    margin-inline: auto;
+}
+
+footer {
+    padding: 1rem;
+    background-color: var(--bg-300);
+}
+
+h1 {
+    margin: 1rem 0;
+    font-size: 2.5rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.button {
+    background-color: var(--primary-100);
+    color: var(--text-100);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.button-primary {
+    background-color: var(--primary-200);
+}
+
+.button-secondary {
+    background-color: var(--primary-300);
+}
+
+/* Hover and active styles for variants */
+.button-primary:hover {
+    background-color: var(--accent-100);
+}
+
+.button-primary:active {
+    background-color: var(--accent-200);
+}
+
+.button-secondary:hover {
+    background-color: var(--accent-100);
+}
+
+.button-secondary:active {
+    background-color: var(--accent-200);
+}
+
+/* navigation bar styles */
+
+.hamburger {
+    padding-right: 20px;
+    cursor: pointer;
+}
+
+.hamburger .line {
+    display: block;
+    width: 40px;
+    height: 5px;
+    margin-bottom: 10px;
+    background-color: var(--accent-200);
+
+}
+
+.nav-links {
+    width: 100%;
+    top: 5rem;
+    left: 48px;
+    display: none;
+    margin: 0;
+}
+
+.nav-links a {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    background-color: var(--accent-100);
+}
+
+.nav-links.expanded {
+    display: unset;
+}
+
+@media screen and (min-width: 636px) {
+    .nav-links {
+        margin-left: 5em;
+        display: block;
+        position: static;
+        width: auto;
+        background: none;
+    }
+
+    .nav-links a {
+        display: inline-block;
+        padding: 15px 20px;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+}

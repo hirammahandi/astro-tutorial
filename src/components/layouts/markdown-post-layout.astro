@@ -1,0 +1,44 @@
+---
+import { fade } from "astro:transitions";
+import TagsLink from "../tags-link.astro";
+import BaseLayout from "./base-layout.astro";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    author: string;
+    image: {
+      url: string;
+      alt: string;
+    };
+    tags: string[];
+  };
+}
+
+// @note By including the frontmatter layout property in an .md file, all frontmatter YAML values will be available in this template file.
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+  <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
+  <!-- @note
+  You can also customize Astro's built-in animations by importing them and then providing any CSS animation property.
+
+  For example, to make the description appear slowly when you navigate to a blog post, import the fade animation into your template for blog posts in Markdown format. Then, add the transition directive for the Astro fade with a duration of 2s:
+  -->
+
+  <p transition:animate={fade({ duration: "2s" })}>
+    <em>{frontmatter.description}</em>
+  </p>
+  <p>
+    Escrito por: <a href="/about/" data-astro-reload>{frontmatter.author}</a>
+  </p>
+  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+  <p>Etiquetas</p>
+  <TagsLink tags={frontmatter.tags} />
+
+  <!-- @note slot works like children prop in react -->
+  <slot />
+</BaseLayout>

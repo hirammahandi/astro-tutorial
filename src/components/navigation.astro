@@ -1,0 +1,12 @@
+<div class="nav-links" transition:animate="slide">
+  <a href="/">Inicio</a>
+  <!--
+    @note
+    Sometimes you will want a full browser reload to be performed when visitors click on certain links. For example, you may be linking to a page that does not use the <ViewTransitions /> router, or to a file directly, such as a .pdf file.
+
+    To get your browser to refresh every time you click the navigation link to go to your About page, add the data-astro-reload attribute to the <a> tag in your <Navigation/> component. This will completely override the <ViewTransitions /> router and any view transitions animation for this particular link.
+   -->
+  <a href="/about" data-astro-reload>Sobre mi</a>
+  <a href="/blog">Blog</a>
+  <a href="/tags">Etiquetas</a>
+</div>

@@ -1,0 +1,50 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import Header from "../header.astro";
+import Footer from "../footer.astro";
+
+// CSS
+import "../../styles/global.css";
+
+interface Props {
+  pageTitle: string;
+}
+// @note passing props
+const { pageTitle } = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <!-- @note First, the ViewTransitions router must be imported into the frontmatter of the component. Then, add the routing component inside the <head> element. -->
+    <!-- @note  Correct order of events after a visitor clicks on a link to go to a new page during client-side browsing
+        astro:after-swap
+        la nueva página es visible
+        astro:page-load
+      -->
+    <ViewTransitions />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <!-- @note
+        With view transitions enabled, you currently have a small fade transition set up for all page transition animations. Astro also provides a built-in animation called slide. To change the animation type for a single element, add the transition:animation="" directive.
+
+        For example, to make page titles slide instead of fade, add transition:animate="slide" to the <h1> element in the BaseLayout.
+       -->
+      <h1 transition:animate="slide">{pageTitle}</h1>
+      <!-- @note  slot is used for pass children in a layout
+        The <slot /> tag allows you to inject (or "insert") child content written between the opening and closing <Component></Component> tags in any Component.astro file.
+      -->
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import "../../scripts/menu.js";
+    </script>
+  </body>
+</html>

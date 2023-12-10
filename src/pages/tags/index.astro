@@ -1,0 +1,15 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../components/layouts/base-layout.astro";
+import TagsLink from "../../components/tags-link.astro";
+
+// const allPosts = await Astro.glob("../posts/*.md");
+const allPosts = await getCollection("posts");
+
+const tags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
+const pageTitle = "Índice de etiquetas";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <TagsLink tags={tags} />
+</BaseLayout>
